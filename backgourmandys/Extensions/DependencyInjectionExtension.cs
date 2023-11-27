@@ -30,5 +30,6 @@ public static class DependencyInjectionExtension
         private static void AddRepositories(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IRepository<Cake>, CakeRepository>();
+            builder.Services.AddScoped<IRepository<PicturePath>, PicturePathRepository>();
         }
 }
