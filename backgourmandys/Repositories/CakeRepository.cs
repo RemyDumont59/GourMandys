@@ -15,11 +15,11 @@ namespace backgourmandys.Repositories
         
         public async Task<Cake?> GetById(int id)
         {
-            return await _dbContext.Cakes.FindAsync(id);
+            return await _dbContext.Cakes.Include(c => c.PicturePath).FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<Cake?> Get(Expression<Func<Cake, bool>> predicate)
         {
-            return await _dbContext.Cakes.FirstOrDefaultAsync(predicate);
+            return await _dbContext.Cakes.Include(c => c.PicturePath).FirstOrDefaultAsync(predicate);
         }
         public async Task<List<Cake>> GetAll()
         {
