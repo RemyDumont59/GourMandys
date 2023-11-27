@@ -23,11 +23,11 @@ namespace backgourmandys.Repositories
         }
         public async Task<List<Cake>> GetAll()
         {
-            return await _dbContext.Cakes.ToListAsync();
+            return await _dbContext.Cakes.Include(c => c.PicturePath).ToListAsync();
         }
         public async Task<List<Cake>> GetAll(Expression<Func<Cake, bool>> predicate)
         {
-            return await _dbContext.Cakes.Where(predicate).ToListAsync();
+            return await _dbContext.Cakes.Include(c => c.PicturePath).Where(predicate).ToListAsync();
         }
     }
 }

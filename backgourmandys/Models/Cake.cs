@@ -15,7 +15,7 @@ namespace backgourmandys.Models
         public Category Category { get; set; }
         public Flavour Flavour { get; set; }
         [Required]
-        public List<PicturePath>? PicturePath { get; set; }
+        public List<PicturePath>? PicturePath { get; set; } = new List<PicturePath>();
         [Required]
         public decimal Price { get; set; }
         public int Pieces { get; set; }
