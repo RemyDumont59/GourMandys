@@ -1,19 +1,18 @@
 ﻿using backgourmandys.Models;
 using backgourmandys.Repositories;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backgourmandys.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CakeController : ControllerBase
+    public class PicturePathController : ControllerBase
     {
-        private readonly IRepository<Cake> _cakeRepository;
+        private readonly IRepository<PicturePath> _picturePathRepository;
 
-        public CakeController(IRepository<Cake> cakeRepository)
+        public PicturePathController(IRepository<PicturePath> picturePathRepository)
         {
-            _cakeRepository = cakeRepository;
+            _picturePathRepository = picturePathRepository;
         }
 
         // En construction
@@ -26,40 +25,39 @@ namespace backgourmandys.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            List<Cake> cakes = await _cakeRepository.GetAll();
+            List<PicturePath> picturePaths = await _picturePathRepository.GetAll();
 
-            return Ok(cakes);
+            return Ok(picturePaths);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var cake = await _cakeRepository.GetById(id);
+            var picturePath = await _picturePathRepository.GetById(id);
 
-            if (cake == null)
+            if (picturePath == null)
                 return NotFound(new
                 {
-                    Message = "There is no Cake with this Id."
+                    Message = "There is no PicturePath with this Id."
                 });
 
             return Ok(new
             {
-                Message = "Cake found.",
-                Cake = cake,
+                Message = "PicturePath found.",
+                PicturePath = picturePath,
             });
         }
 
         #endregion Read
-        
+
         // En construction
         #region Update
 
         #endregion Update
-        
+
         // En construction
         #region Delete
 
         #endregion Delete
-
     }
 }
