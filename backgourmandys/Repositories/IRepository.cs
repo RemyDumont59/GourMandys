@@ -1,6 +1,6 @@
 ﻿namespace backgourmandys.Repositories
 {
-    public interface IRepository<T> 
+    public interface IRepository<TEntity> 
     {
     }
 }

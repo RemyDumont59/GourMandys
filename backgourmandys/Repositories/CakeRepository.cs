@@ -1,4 +1,4 @@
-﻿namespace backgourmandys.Models.Repositories
+﻿namespace backgourmandys.Repositories
 {
     public class CakeRepository
     {

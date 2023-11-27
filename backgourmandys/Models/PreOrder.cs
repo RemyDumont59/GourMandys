@@ -1,6 +1,6 @@
 ﻿namespace backgourmandys.Models
 {
-    public class Order
+    public class PreOrder
     {
     }
 }
