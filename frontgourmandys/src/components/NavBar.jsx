@@ -7,7 +7,6 @@ function NavBar() {
             <nav>
                 <span>Ma navBar</span>
                 <NavLink to="/">Accueil</NavLink>
-                <NavLink to="/">Accueil</NavLink>
                 <NavLink to="/contact">Contact</NavLink>
                 <NavLink to="/products">Products</NavLink>
             </nav>
