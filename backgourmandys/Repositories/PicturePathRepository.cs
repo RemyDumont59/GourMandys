@@ -31,5 +31,12 @@ namespace backgourmandys.Repositories
             return await _dbContext.PicturePaths.Where(predicate).ToListAsync();
         }
         #endregion
+        #region Create
+        public async Task<int> Add(PicturePath picturePath)
+        {
+            _dbContext.PicturePaths.Add(picturePath);
+            return await _dbContext.SaveChangesAsync();
+        }
+        #endregion
     }
 }

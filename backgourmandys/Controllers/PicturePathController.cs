@@ -19,6 +19,16 @@ namespace backgourmandys.Controllers
         #region Create
 
         #endregion Create
+        [HttpPost]
+        public async Task<IActionResult> Create(PicturePath picturePath)
+        {
+            if (await _picturePathRepository.Add(picturePath) == 0)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
 
         #region Read
 
