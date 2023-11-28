@@ -1,8 +1,6 @@
 import './App.css'
-import NavBar from "./components/NavBar.jsx";
 import Products from "./pages/Products.jsx";
-import Footer from "./components/Footer.jsx";
-import {createBrowserRouter, defer, NavLink, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, defer, Outlet, RouterProvider} from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import Contact from "./pages/Contact.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -21,21 +19,15 @@ const router = createBrowserRouter([
             },
             {
                 path: 'products',
-                element: <div>
-                    <h2>asideBar</h2>
-                    <main>
-                        <Outlet />
-                    </main>
-                </div>,
                 children: [
                     {
                         path: '',
                         element: <Products />,
                         loader: () => {
-                            const posts = fetch('https://jsonplaceholder.typicode.com/posts?_limit=10')
+                            const cakes = fetch('http://localhost:5016/api/Cake')
                                 .then(r => r.json());
                             return defer({
-                                posts,
+                                cakes,
                             })
                         }
                     },
