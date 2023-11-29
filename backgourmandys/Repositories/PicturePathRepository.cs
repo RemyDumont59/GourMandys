@@ -13,6 +13,17 @@ namespace backgourmandys.Repositories
             _dbContext = dbContext;
         }
 
+        #region Create
+
+        public async Task<int> Add(PicturePath picturePath)
+        {
+            var addedPicturePath = await _dbContext.PicturePaths.AddAsync(picturePath);
+            await _dbContext.SaveChangesAsync();
+            return addedPicturePath.Entity.Id;
+        }
+
+        #endregion
+
         #region Read
 
         public async Task<PicturePath?> GetById(int id)
@@ -34,16 +45,37 @@ namespace backgourmandys.Repositories
 
         #endregion
 
-        #region Create
+        #region Update
 
-        
+        public async Task<bool> Update(PicturePath picturePath)
+        {
+            var picturePathFromDb = await GetById(picturePath.Id);
+
+            if (picturePathFromDb == null) 
+                return false;
+
+            if (picturePathFromDb.Path != picturePath.Path)
+                picturePathFromDb.Path = picturePath.Path;
+
+            if (picturePathFromDb.CakeId != picturePath.CakeId)
+                picturePathFromDb.CakeId = picturePath.CakeId;
+
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
 
         #endregion
-        #region Create
-        public async Task<int> Add(PicturePath picturePath)
+
+        #region Delete
+
+        public async Task<bool> Delete(int id)
         {
-            _dbContext.PicturePaths.Add(picturePath);
-            return await _dbContext.SaveChangesAsync();
+            var picturePathToDelete = await GetById(id);
+
+            if (picturePathToDelete == null) 
+                return false;
+
+            _dbContext.PicturePaths.Remove(picturePathToDelete);
+            return await _dbContext.SaveChangesAsync() > 0;
         }
         #endregion
     }
