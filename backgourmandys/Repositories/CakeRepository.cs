@@ -40,10 +40,20 @@ namespace backgourmandys.Repositories
         public async Task<int> Add(Cake cake)
         {
             _dbContext.Cakes.Add(cake);
-           return await _dbContext.SaveChangesAsync();         
+            return await _dbContext.SaveChangesAsync();
         }
-
         #endregion
 
+        // THROW NEW NOTIMPLEMENTED EXCEPTION
+        public Task<bool> Update(Cake entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        // THROW NEW NOTIMPLEMENTED EXCEPTION
+        public Task<bool> Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

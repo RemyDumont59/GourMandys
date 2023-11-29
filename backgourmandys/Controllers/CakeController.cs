@@ -16,8 +16,8 @@ namespace backgourmandys.Controllers
             _cakeRepository = cakeRepository;
         }
 
-        // En construction
         #region Create
+        [HttpPost]
         public async Task<IActionResult> Create(Cake cake)
         {
             int result = await _cakeRepository.Add(cake);
@@ -29,17 +29,7 @@ namespace backgourmandys.Controllers
         }
 
         #endregion Create
-        [HttpPost]
-        public async Task<IActionResult> Create(Cake cake)
-        {
-            if( await _cakeRepository.Add(cake) == 0)
-            {
-                return BadRequest();
-            }
-
-            return Ok();
-        }
-
+        
         #region Read
 
         [HttpGet]
