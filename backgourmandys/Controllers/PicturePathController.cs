@@ -15,23 +15,19 @@ namespace backgourmandys.Controllers
             _picturePathRepository = picturePathRepository;
         }
 
-        // En construction
         #region Create
-
-        #endregion Create
         [HttpPost]
-        public async Task<IActionResult> Create(PicturePath picturePath)
+        public async Task<IActionResult> Post([FromBody] PicturePath picturePath)
         {
-            if (await _picturePathRepository.Add(picturePath) == 0)
-            {
-                return BadRequest();
-            }
+            var createdAtId = await _picturePathRepository.Add(picturePath);
 
-            return Ok();
+            if (createdAtId > 0)
+                return CreatedAtAction(nameof(GetById), new { id = createdAtId }, "PicturePath Added !");
+            return BadRequest("Something went wrong...");
         }
+        #endregion 
 
         #region Read
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -57,17 +53,34 @@ namespace backgourmandys.Controllers
                 PicturePath = picturePath,
             });
         }
-
         #endregion Read
 
-        // En construction
         #region Update
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] PicturePath picturePath)
+        {
+            var picturePathFromDb = _picturePathRepository.GetById(id);
 
+            if (picturePathFromDb == null)
+                return NotFound("There is no PicturePath with this Id.");
+
+            picturePath.Id = id;
+
+            if (await _picturePathRepository.Update(picturePath))
+                return Ok("PicturePath Updated.");
+
+            return BadRequest("Something went wrong...");
+        }
         #endregion Update
 
-        // En construction
         #region Delete
-
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (await _picturePathRepository.Delete(id))
+                return Ok("PicturePath Deleted.");
+            return NotFound("PicturePath Not Found.");
+        }
         #endregion Delete
     }
 }
