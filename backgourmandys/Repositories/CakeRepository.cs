@@ -12,7 +12,9 @@ namespace backgourmandys.Repositories
         {
             _dbContext = dbContext;
         }
-        
+
+        #region Read
+
         public async Task<Cake?> GetById(int id)
         {
             return await _dbContext.Cakes.Include(c => c.PicturePath).FirstOrDefaultAsync(c => c.Id == id);
@@ -29,5 +31,18 @@ namespace backgourmandys.Repositories
         {
             return await _dbContext.Cakes.Include(c => c.PicturePath).Where(predicate).ToListAsync();
         }
+
+        #endregion
+
+        #region Create
+
+        public async Task<int> Add(Cake cake)
+        {
+            _dbContext.Cakes.Add(cake);
+           return await _dbContext.SaveChangesAsync();         
+        }
+
+        #endregion
+
     }
 }

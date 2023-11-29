@@ -14,6 +14,7 @@ namespace backgourmandys.Repositories
         }
 
         #region Read
+
         public async Task<PicturePath?> GetById(int id)
         {
             return await _dbContext.PicturePaths.FindAsync(id);
@@ -30,6 +31,13 @@ namespace backgourmandys.Repositories
         {
             return await _dbContext.PicturePaths.Where(predicate).ToListAsync();
         }
+
+        #endregion
+
+        #region Create
+
+        
+
         #endregion
     }
 }

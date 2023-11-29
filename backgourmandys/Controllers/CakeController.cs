@@ -18,6 +18,15 @@ namespace backgourmandys.Controllers
 
         // En construction
         #region Create
+        public async Task<IActionResult> Create(Cake cake)
+        {
+            int result = await _cakeRepository.Add(cake);
+            if(result == 0)
+            {
+                return BadRequest();
+            }
+            return Ok();           
+        }
 
         #endregion Create
 
