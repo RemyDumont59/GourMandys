@@ -1,0 +1,7 @@
+.imgCake {
+    transition: transform .5s;
+}
+
+.imgCake:hover {
+    transform: scale(1.3);
+}

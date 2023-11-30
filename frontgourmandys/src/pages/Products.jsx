@@ -1,25 +1,50 @@
 import {Await, NavLink, useLoaderData} from "react-router-dom";
 import {Suspense} from "react";
+import {Button, Card, CardBody, CardLink, CardSubtitle, CardText, CardTitle} from "reactstrap";
 
 function Products() {
     const { cakes } = useLoaderData();
     return (
         <div>
-            <h1>Product page</h1>
+            <h1 className="text-center m-5">Product page</h1>
             <Suspense fallback={'Chargement...'}>
                 <Await resolve={cakes}>
                     {(cakes) => (
-                        <ul>
+                        <div className="d-flex flex-wrap gap-3 h-100 w-100 justify-content-center">
                             {cakes.map((cake) => (
-                                <li key={cake.id}>
-                                    <NavLink to={`http://localhost:5173/products/${cake.id}`}>
-                                        <h2>{cake.title}</h2>
-                                        <img src={cake.picturePath[0] && cake.picturePath[0].path} alt={cake.title}/>
-                                        <p>{cake.content}</p>
-                                    </NavLink>
-                                </li>
+                                <NavLink
+                                    key={cake.id} to={`http://localhost:5173/products/${cake.id}`}>
+                                    <Card
+                                        style={{
+                                            width: '18rem',
+                                            height: '400px'
+                                        }}
+                                    >
+                                        <CardBody>
+                                            <CardTitle tag="h5">
+                                                {cake.title}
+                                            </CardTitle>
+                                        </CardBody>
+                                        <CardBody className="overflow-hidden h-50">
+                                            <img
+                                                className="imgCake"
+                                                alt={cake.title}
+                                                src={cake.picturePath[0] && cake.picturePath[0].path}
+                                                width="100%"
+                                            />
+                                        </CardBody>
+                                        <CardBody>
+                                            <CardText>
+                                                {cake.content}
+                                            </CardText>
+                                            <Button>
+                                                Voir
+                                            </Button>
+                                        </CardBody>
+                                    </Card>
+                                </NavLink>
                             ))}
-                        </ul>
+                        </div>
                     )}
                 </Await>
             </Suspense>
