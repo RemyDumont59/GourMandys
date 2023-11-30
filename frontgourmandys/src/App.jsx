@@ -1,11 +1,12 @@
 import './App.css'
 import Products from "./pages/Products.jsx";
-import {createBrowserRouter, defer, Outlet, RouterProvider} from "react-router-dom";
+import {createBrowserRouter, defer, RouterProvider} from "react-router-dom";
 import Layout from "./components/Layout.jsx";
 import Contact from "./pages/Contact.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import Product from "./pages/Product.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import AddCake from "./pages/admin/AddCake.jsx";
 
 const router = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
                 path: 'contact',
                 element: <Contact />,
             },
+            {
+                path: 'admin',
+                element: <AddCake />
+            }
         ],
     }
 ]);

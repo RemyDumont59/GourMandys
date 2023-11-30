@@ -7,7 +7,7 @@ namespace backgourmandys.Repositories
 {
     public class PicturePathRepository : IRepository<PicturePath>
     {
-        private ApplicationDbContext _dbContext { get; }
+        private readonly ApplicationDbContext _dbContext;
         public PicturePathRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -31,12 +31,14 @@ namespace backgourmandys.Repositories
             return await _dbContext.PicturePaths.Where(predicate).ToListAsync();
         }
         #endregion
+        
         #region Create
         public async Task<int> Add(PicturePath picturePath)
         {
             _dbContext.PicturePaths.Add(picturePath);
             return await _dbContext.SaveChangesAsync();
         }
+        
         #endregion
     }
 }

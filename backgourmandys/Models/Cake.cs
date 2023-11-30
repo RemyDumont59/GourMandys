@@ -1,5 +1,4 @@
 ﻿using backgourmandys.Enum;
-using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace backgourmandys.Models

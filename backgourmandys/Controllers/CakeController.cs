@@ -1,6 +1,5 @@
 ﻿using backgourmandys.Models;
 using backgourmandys.Repositories;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backgourmandys.Controllers
@@ -17,9 +16,6 @@ namespace backgourmandys.Controllers
         }
 
         // En construction
-        #region Create
-
-        #endregion Create
         [HttpPost]
         public async Task<IActionResult> Create(Cake cake)
         {
@@ -28,7 +24,11 @@ namespace backgourmandys.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(new
+            {
+                Message = "Cake ajouté avec succé",
+                CakeId = cake.Id,
+            });
         }
 
         #region Read
@@ -60,16 +60,7 @@ namespace backgourmandys.Controllers
         }
 
         #endregion Read
-        
-        // En construction
-        #region Update
 
-        #endregion Update
-        
-        // En construction
-        #region Delete
-
-        #endregion Delete
 
     }
 }

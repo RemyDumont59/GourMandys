@@ -1,4 +1,5 @@
-﻿using backgourmandys.Models;
+﻿using backgourmandys.Interfaces;
+using backgourmandys.Models;
 using backgourmandys.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,25 +10,46 @@ namespace backgourmandys.Controllers
     public class PicturePathController : ControllerBase
     {
         private readonly IRepository<PicturePath> _picturePathRepository;
+        private readonly IPictureService _pictureService;
 
-        public PicturePathController(IRepository<PicturePath> picturePathRepository)
+        public PicturePathController(IRepository<PicturePath> picturePathRepository, IPictureService pictureService)
         {
             _picturePathRepository = picturePathRepository;
+            _pictureService = pictureService;
         }
 
         // En construction
-        #region Create
-
-        #endregion Create
+        // #region Create
+        //
+        // #endregion Create
         [HttpPost]
-        public async Task<IActionResult> Create(PicturePath picturePath)
+        public async Task<IActionResult> Create(IFormFile formFile)
         {
-            if (await _picturePathRepository.Add(picturePath) == 0)
+            if (ModelState.IsValid)
             {
-                return BadRequest();
+                    var result = await _pictureService.AddPhotoAsync(formFile);
+                    var picturePath = new PicturePath()
+                    {
+                        Path = result.Url.ToString(),
+                        CakeId = Int32.Parse(formFile.FileName),
+                    };
+                    if (await _picturePathRepository.Add(picturePath) == 0)
+                    {
+                        return BadRequest("bad request");
+                    }
+
+                    return Ok(new
+                    {
+                        Message = "image uploaded successfully",
+                        formFile = picturePath,
+                    });
+            }
+            else
+            {
+                ModelState.AddModelError("", "Picture upload failed");
             }
 
-            return Ok();
+            return NotFound("unable to find the picture");
         }
 
         #region Read
@@ -61,13 +83,13 @@ namespace backgourmandys.Controllers
         #endregion Read
 
         // En construction
-        #region Update
-
-        #endregion Update
+        // #region Update
+        //
+        // #endregion Update
 
         // En construction
-        #region Delete
-
-        #endregion Delete
+        // #region Delete
+        //
+        // #endregion Delete
     }
 }

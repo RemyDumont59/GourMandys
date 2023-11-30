@@ -13,7 +13,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        List<PicturePath> Pictures = new List<PicturePath>()
+        List<PicturePath> pictures = new List<PicturePath>()
         {
             new PicturePath()
             {
@@ -90,7 +90,7 @@ public class ApplicationDbContext : DbContext
             },
         };
         modelBuilder.Entity<Cake>().HasData(cakesList);
-        modelBuilder.Entity<PicturePath>().HasData(Pictures);
+        modelBuilder.Entity<PicturePath>().HasData(pictures);
     }
 }
 

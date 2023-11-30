@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using backgourmandys.Datas;
 using backgourmandys.Models;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +34,5 @@ namespace backgourmandys.Repositories
             _dbContext.Cakes.Add(cake);
             return await _dbContext.SaveChangesAsync();
         }
-      
     }
 }

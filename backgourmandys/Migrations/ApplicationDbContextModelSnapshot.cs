@@ -62,7 +62,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cakes");
+                    b.ToTable("Cakes", (string)null);
 
                     b.HasData(
                         new
@@ -141,7 +141,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("CakeId");
 
-                    b.ToTable("PicturePaths");
+                    b.ToTable("PicturePaths", (string)null);
 
                     b.HasData(
                         new

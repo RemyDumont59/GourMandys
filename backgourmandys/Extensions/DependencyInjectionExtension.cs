@@ -3,6 +3,9 @@ using backgourmandys.Models;
 using backgourmandys.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using backgourmandys.Helpers;
+using backgourmandys.Interfaces;
+using backgourmandys.Services;
 
 namespace backgourmandys.Extensions;
 
@@ -12,6 +15,10 @@ public static class DependencyInjectionExtension
     {
         builder.Services.AddControllers().AddJsonOptions(x =>
                         x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+        builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+
+        builder.Services.AddScoped<IPictureService, PictureService>();
 
         builder.AddDatabase();
 
