@@ -5,7 +5,7 @@ import {Button, Card, CardBody, CardLink, CardSubtitle, CardText, CardTitle} fro
 function Products() {
     const { cakes } = useLoaderData();
     return (
-        <div>
+        <div className="h-100">
             <h1 className="text-center m-5">Product page</h1>
             <Suspense fallback={'Chargement...'}>
                 <Await resolve={cakes}>
