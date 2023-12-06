@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Progress} from "reactstrap";
 
 function AddCake() {
     const [cake, setCake] = useState({
@@ -13,6 +14,8 @@ function AddCake() {
     });
 
     const [files, setFiles] = useState([]);
+    const [progressBar, setProgressBar] = useState(0);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const handleChange = (e) => {
         for (let i = 0; i < e.target.files.length; i++) {
@@ -40,7 +43,7 @@ function AddCake() {
                     pieces: cake.pieces,
                     minimalQuantity: cake.minimalQuantity,
                     lot: cake.lot,
-                })
+                }),
             })
                 .then((res) => res.json())
                 .then((data) => {
@@ -60,10 +63,12 @@ function AddCake() {
                     .then((data) => {
                         console.log("RESPONSE from api picture ", data);
                     });
+                setProgressBar(((i + 1) / files.length) * 100);
             }
         }
 
         postCakeAndPicturePath().catch();
+        setIsSuccess(true);
     };
 
     return (
@@ -126,6 +131,20 @@ function AddCake() {
                 ))}
             </div>
             <button onClick={onSubmit}>Submit</button>
+            <Progress
+                className="my-3"
+                style={{
+                    height: '3px'
+                }}
+                value={progressBar}
+            />
+            <Progress
+                className="my-3"
+                style={{
+                    height: '20px'
+                }}
+                value={progressBar}
+            />
         </form>
     );
 }

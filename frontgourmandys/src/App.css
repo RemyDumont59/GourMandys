@@ -40,6 +40,8 @@ body {
     font-size: 5rem;
 }
 
+
+
 @media (max-width: 992px) {
     .navbar-brand-title {
         font-size: 3rem;
