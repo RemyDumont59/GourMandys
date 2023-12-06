@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e7825a2-6b72-443f-9324-8391fdde7d7a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backgourmandys/Controllers/PicturePathController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backgourmandys/Controllers/PicturePathController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backgourmandys/DTOs/CreatePicturePathDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backgourmandys/DTOs/CreatePicturePathDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontgourmandys/src/pages/admin/AddCake.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontgourmandys/src/pages/admin/AddCake.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +17,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2Z2BacLJCX2Ohw94NdcVXej81b4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,7 +32,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "slyPictureAddd",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "F:/Projects/GourMandy's Project/GourMandys",
+    "last_opened_file_path": "C:/Users/ssmah/Documents/GourMandy's Project/gourmandysofficial",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -44,6 +46,7 @@
       <option name="presentableId" value="Default" />
       <updated>1701610357742</updated>
       <workItem from="1701610359060" duration="180000" />
+      <workItem from="1701857684324" duration="7000" />
     </task>
     <servers />
   </component>

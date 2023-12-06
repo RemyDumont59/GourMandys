@@ -15,44 +15,55 @@ function AddCake() {
     const [files, setFiles] = useState([]);
 
     const handleChange = (e) => {
-        setFiles(e.target.files);
+        for (let i = 0; i < e.target.files.length; i++) {
+            setFiles((prevState) => {
+                return [...prevState, e.target.files[i]]
+            });
+        }
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        let cakeId;
-        fetch("http://localhost:5016/api/Cake", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                title: cake.title,
-                category: cake.category,
-                flavour: cake.flavour,
-                price: cake.price,
-                pieces: cake.pieces,
-                minimalQuantity: cake.minimalQuantity,
-                lot: cake.lot,
+        let newCakeId;
+
+        const postCakeAndPicturePath = async () => {
+            await fetch("http://localhost:5016/api/Cake", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    title: cake.title,
+                    category: cake.category,
+                    flavour: cake.flavour,
+                    price: cake.price,
+                    pieces: cake.pieces,
+                    minimalQuantity: cake.minimalQuantity,
+                    lot: cake.lot,
+                })
             })
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log("RESPONSE from api success ", data);
-                cakeId = data.cakeId;
-                for(let i = 0; i < files.length; i++) {
-                    const formData = new FormData();
-                    formData.append(`formFile`, files[i], cakeId);
-                    fetch("http://localhost:5016/api/PicturePath", {
-                        method: "POST",
-                        body: formData // working -> JSON.stringify("3")
-                    })
-                        .then((res) => res.json())
-                        .then((data) => {
-                            console.log("RESPONSE from api picture ", data);
-                        });
-                }
-            });
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("RESPONSE from api success ", data);
+                    newCakeId = data.cakeId;
+                });
+            for(let i = 0; i < files.length; i++) {
+                const formData = new FormData();
+                formData.append("FileName", files[i].name);
+                formData.append("FormFile", files[i]);
+                formData.append("CakeId", newCakeId);
+                await fetch("http://localhost:5016/api/PicturePath", {
+                    method: "POST",
+                    body: formData // working -> JSON.stringify("3")
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log("RESPONSE from api picture ", data);
+                    });
+            }
+        }
+
+        postCakeAndPicturePath().catch();
     };
 
     return (
@@ -108,6 +119,11 @@ function AddCake() {
                     Picture :
                     <input type="file" multiple={true} onChange={(e) => handleChange(e)} />
                 </label>
+            </div>
+            <div>
+                {files.map((file, index) => (
+                    <img key={index} src={URL.createObjectURL(file)} alt="une image" />
+                ))}
             </div>
             <button onClick={onSubmit}>Submit</button>
         </form>

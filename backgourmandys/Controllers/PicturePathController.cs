@@ -1,4 +1,5 @@
-﻿using backgourmandys.Interfaces;
+﻿using backgourmandys.DTOs;
+using backgourmandys.Interfaces;
 using backgourmandys.Models;
 using backgourmandys.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -23,17 +24,17 @@ namespace backgourmandys.Controllers
         //
         // #endregion Create
         [HttpPost]
-        public async Task<IActionResult> Create(IFormFile formFile)
+        public async Task<IActionResult> Create([FromForm] CreatePicturePathDto createPicturePathDto)
         {
             if (ModelState.IsValid)
             {
-                    var result = await _pictureService.AddPhotoAsync(formFile);
-                    var picturePath = new PicturePath()
+                    var result = await _pictureService.AddPhotoAsync(createPicturePathDto.FormFile!);
+                    var thePicturePath = new PicturePath()
                     {
                         Path = result.Url.ToString(),
-                        CakeId = Int32.Parse(formFile.FileName),
+                        CakeId = createPicturePathDto.CakeId,
                     };
-                    if (await _picturePathRepository.Add(picturePath) == 0)
+                    if (await _picturePathRepository.Add(thePicturePath) == 0)
                     {
                         return BadRequest("bad request");
                     }
@@ -41,7 +42,7 @@ namespace backgourmandys.Controllers
                     return Ok(new
                     {
                         Message = "image uploaded successfully",
-                        formFile = picturePath,
+                        formFile = thePicturePath,
                     });
             }
             else

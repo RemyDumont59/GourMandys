@@ -4,7 +4,7 @@ namespace backgourmandys.DTOs;
 
 public class CreatePicturePathDto
 {
-    public int Id { get; set; }
-    public IFormFile? Path { get; set; }
+    public IFormFile? FormFile { get; set; }
+    public string? FileName { get; set; }
     public int CakeId { get; set; }
 }
