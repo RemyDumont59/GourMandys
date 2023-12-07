@@ -25,11 +25,10 @@ function AddCake() {
         }
     }
 
+
     const onSubmit = (e) => {
         e.preventDefault();
-        let newCakeId;
-
-        const postCakeAndPicturePath = async () => {
+        const postCake = async () => {
             await fetch("http://localhost:5016/api/Cake", {
                 method: "POST",
                 headers: {
@@ -48,13 +47,16 @@ function AddCake() {
                 .then((res) => res.json())
                 .then((data) => {
                     console.log("RESPONSE from api success ", data);
-                    newCakeId = data.cakeId;
+                    postPicturePath(data.cakeId);
                 });
+        }
+
+        const postPicturePath = async (cakeId) => {
             for(let i = 0; i < files.length; i++) {
                 const formData = new FormData();
                 formData.append("FileName", files[i].name);
                 formData.append("FormFile", files[i]);
-                formData.append("CakeId", newCakeId);
+                formData.append("CakeId", cakeId);
                 await fetch("http://localhost:5016/api/PicturePath", {
                     method: "POST",
                     body: formData // working -> JSON.stringify("3")
@@ -67,85 +69,100 @@ function AddCake() {
             }
         }
 
-        postCakeAndPicturePath().catch();
+        postCake().catch();
         setIsSuccess(true);
     };
 
     return (
-        <form>
-            <label>
-                Title :
-                <input value={cake.title} onChange={(e) => setCake({...cake, title: e.target.value})} />
-            </label>
-            <label>
-                Content :
-                <input value={cake.content} onChange={(e) => setCake({...cake, content: e.target.value})} />
-            </label>
-            <label>
-                Price :
-                <input type="number" step=".01" value={cake.price === 0 ? '' : cake.price} onChange={(e) => setCake({...cake, price: +e.target.value})} />
-            </label>
-            <div>
+
+        isSuccess && progressBar === 100 ?
+            (<div>
+                <p>Images téléchargées avec succès</p>
+            </div>)
+
+            :
+
+            (<form>
                 <label>
-                    Category :
-                    <input type="number" value={cake.category} onChange={(e) => setCake({...cake, category: +e.target.value})} />
+                    Title :
+                    <input value={cake.title} onChange={(e) => setCake({...cake, title: e.target.value})}/>
                 </label>
                 <label>
-                    Flavour :
-                    <input type="number" value={cake.flavour} onChange={(e) => setCake({...cake, flavour: +e.target.value})} />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Pieces :
-                    <input type="number" value={cake.pieces} onChange={(e) => setCake({...cake, pieces: +e.target.value})} />
+                    Content :
+                    <input value={cake.content} onChange={(e) => setCake({...cake, content: e.target.value})}/>
                 </label>
                 <label>
-                    Lot :
-                    <input type="number" value={cake.lot} onChange={(e) => setCake({...cake, lot: +e.target.value})} />
+                    Price :
+                    <input type="number" step=".01" value={cake.price === 0 ? '' : cake.price}
+                           onChange={(e) => setCake({...cake, price: +e.target.value})}/>
                 </label>
-                <label>
-                    MinimalQuantity :
-                    <input type="number" value={cake.minimalQuantity} onChange={(e) => setCake({...cake, minimalQuantity: +e.target.value})} />
-                </label>
-            </div>
-            {/*<div>*/}
-            {/*    <label>*/}
-            {/*        Number Cake :*/}
-            {/*        <input type="checkbox" checked={cake.isNumberCake} onChange={(e) => setCake({...cake, isNumberCake: e.target.checked})} />*/}
-            {/*    </label>*/}
-            {/*    <label>*/}
-            {/*        Letter Cake :*/}
-            {/*        <input type="checkbox" checked={cake.isLetterCake} onChange={(e) => setCake({...cake, isLetterCake: e.target.checked})} />*/}
-            {/*    </label>*/}
-            {/*</div>*/}
-            <div>
-                <label>
-                    Picture :
-                    <input type="file" multiple={true} onChange={(e) => handleChange(e)} />
-                </label>
-            </div>
-            <div>
-                {files.map((file, index) => (
-                    <img key={index} src={URL.createObjectURL(file)} alt="une image" />
-                ))}
-            </div>
-            <button onClick={onSubmit}>Submit</button>
-            <Progress
-                className="my-3"
-                style={{
-                    height: '3px'
-                }}
-                value={progressBar}
-            />
-            <Progress
-                className="my-3"
-                style={{
-                    height: '20px'
-                }}
-                value={progressBar}
-            />
-        </form>
+                <div>
+                    <label>
+                        Category :
+                        <input type="number" value={cake.category}
+                               onChange={(e) => setCake({...cake, category: +e.target.value})}/>
+                    </label>
+                    <label>
+                        Flavour :
+                        <input type="number" value={cake.flavour}
+                               onChange={(e) => setCake({...cake, flavour: +e.target.value})}/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Pieces :
+                        <input type="number" value={cake.pieces}
+                               onChange={(e) => setCake({...cake, pieces: +e.target.value})}/>
+                    </label>
+                    <label>
+                        Lot :
+                        <input type="number" value={cake.lot}
+                               onChange={(e) => setCake({...cake, lot: +e.target.value})}/>
+                    </label>
+                    <label>
+                        MinimalQuantity :
+                        <input type="number" value={cake.minimalQuantity}
+                               onChange={(e) => setCake({...cake, minimalQuantity: +e.target.value})}/>
+                    </label>
+                </div>
+                {/*<div>*/}
+                {/*    <label>*/}
+                {/*        Number Cake :*/}
+                {/*        <input type="checkbox" checked={cake.isNumberCake} onChange={(e) => setCake({...cake, isNumberCake: e.target.checked})} />*/}
+                {/*    </label>*/}
+                {/*    <label>*/}
+                {/*        Letter Cake :*/}
+                {/*        <input type="checkbox" checked={cake.isLetterCake} onChange={(e) => setCake({...cake, isLetterCake: e.target.checked})} />*/}
+                {/*    </label>*/}
+                {/*</div>*/}
+                <div>
+                    <label>
+                        Picture :
+                        <input type="file" multiple={true} onChange={(e) => handleChange(e)}/>
+                    </label>
+                </div>
+                <div>
+                    {files.map((file, index) => (
+                        <img key={index} src={URL.createObjectURL(file)} alt="une image"/>
+                    ))}
+                </div>
+                <button onClick={onSubmit}>Submit</button>
+                <Progress
+                    className="my-3"
+                    style={{
+                        height: '3px'
+                    }}
+                    value={progressBar}
+                />
+                <Progress
+                    className="my-3"
+                    style={{
+                        height: '20px'
+                    }}
+                    value={progressBar}
+                />
+            </form>)
+
     );
 }
 
