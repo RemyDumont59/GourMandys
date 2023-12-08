@@ -40,6 +40,10 @@ body {
     font-size: 5rem;
 }
 
+.navbar-text {
+    line-height: 50px;
+}
+
 .myOffcanvas-brand-title {
     font-family: 'Puppies Play', cursive;
     font-size: 6rem;
@@ -55,6 +59,23 @@ body {
     margin: 0;
     border-bottom: 1px solid #fb889c;
     border-top: 1px solid #fb889c;
+}
+
+.myOffcanvas-item:hover {
+    background-color: #fb889c;
+    color: white;
+}
+
+.offcanvas-span-icon-pink:hover {
+    display: none;
+}
+
+/*.offcanvas-span-icon-white:hover {*/
+/*    display: block;*/
+/*}*/
+
+.active {
+    color: white;
 }
 
 @media (max-width: 992px) {
