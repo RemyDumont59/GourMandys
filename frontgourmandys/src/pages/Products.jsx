@@ -1,17 +1,24 @@
-import {Await, NavLink, useLoaderData} from "react-router-dom";
+import {Await, NavLink} from "react-router-dom";
 import {Suspense} from "react";
-import {Button, Card, CardBody, CardLink, CardSubtitle, CardText, CardTitle} from "reactstrap";
+import {Button, Card, CardBody, CardText, CardTitle} from "reactstrap";
+import {useSort} from "../hooks/useSort.jsx";
 
 function Products() {
-    const { cakes } = useLoaderData();
+    const { sortedCakes } = useSort();
+
     return (
-        <div>
+        <div className="position-relative">
+            <button data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasLeft"
+                aria-controls="offcanvasLeft"
+                className="btnResetFilter"><img src="/src/assets/icons/filter_icon.svg"
+                                                                       alt="icône boutton reset"/></button>
             <h1 className="text-center m-5">Product page</h1>
             <Suspense fallback={'Chargement...'}>
-                <Await resolve={cakes}>
-                    {(cakes) => (
+                <Await resolve={sortedCakes}>
+                    {(sortedCakes) => (
                         <div className="d-flex flex-wrap gap-3 h-100 w-100 justify-content-center">
-                            {cakes.map((cake) => (
+                            {sortedCakes.map((cake) => (
                                 <NavLink
                                     key={cake.id} to={`http://localhost:5173/products/${cake.id}`}>
                                     <Card

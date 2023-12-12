@@ -24,13 +24,13 @@ const router = createBrowserRouter([
                     {
                         path: '',
                         element: <Products />,
-                        loader: () => {
-                            const cakes = fetch('http://localhost:5016/api/Cake')
-                                .then(r => r.json());
-                            return defer({
-                                cakes,
-                            })
-                        }
+                        // loader: () => {
+                        //     const cakes = fetch('http://localhost:5016/api/Cake')
+                        //         .then(r => r.json());
+                        //     return defer({
+                        //         cakes,
+                        //     })
+                        // }
                     },
                     {
                         path: ':id',

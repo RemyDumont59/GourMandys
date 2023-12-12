@@ -1,4 +1,6 @@
 import {NavLink} from "react-router-dom";
+import {FilterCakes} from "./FilterCakes.jsx";
+import {CuteCakes} from "./CuteCakes.jsx";
 
 function MyOffcanvas() {
     return (
@@ -11,7 +13,7 @@ function MyOffcanvas() {
                 <div className="d-flex justify-content-center p-3 myOffcanvas-account-btn mb-5">
                     <button className="my-account p-3 rounded-4 d-none d-sm-block">Mon Compte</button>
                 </div>
-                <div className="text-center">
+                <div className="text-center mb-5">
                     <NavLink to="/" className="text-decoration-none text-black fw-bold">
                         {({isActive}) => (
                         <p data-bs-dismiss="offcanvas" className="myOffcanvas-item" style={{backgroundColor: isActive ? "#fb889c" : "", color: isActive ? 'white' : ''}}>
@@ -42,6 +44,13 @@ function MyOffcanvas() {
                         </p>
                         )}
                     </NavLink>
+                </div>
+                <div className="mb-5">
+                    <div className="myOffcanvas-item-filter ps-3 mb-2 fw-bold p-1">
+                        FILTRES
+                    </div>
+                    <FilterCakes/>
+                    <CuteCakes/>
                 </div>
             </div>
         </div>

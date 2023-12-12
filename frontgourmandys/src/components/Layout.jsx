@@ -3,6 +3,7 @@ import Footer from "./Footer.jsx";
 import NavBar from "./NavBar.jsx";
 import Header from "./Header.jsx";
 import MyOffcanvas from "./MyOffcanvas.jsx";
+import {SortContextProvider} from "../hooks/useSortContext.jsx";
 
 function Layout() {
     return (
@@ -14,8 +15,10 @@ function Layout() {
                 <div className='sticky-top bg-white'>
                     <NavBar />
                 </div>
-                <MyOffcanvas />
-                <Outlet />
+                <SortContextProvider>
+                    <MyOffcanvas />
+                    <Outlet />
+                </SortContextProvider>
             </div>
             <Footer />
         </>
