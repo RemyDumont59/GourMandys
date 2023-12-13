@@ -7,6 +7,8 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import Product from "./pages/Product.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import AddCake from "./pages/admin/AddCake.jsx";
+import Cart from "./pages/Cart.jsx";
+import Promotions from "./pages/Promotions.jsx";
 
 const router = createBrowserRouter([
     {
@@ -39,8 +41,16 @@ const router = createBrowserRouter([
                 ]
             },
             {
+                path: 'promotions',
+                element: <Promotions />,
+            },
+            {
                 path: 'contact',
                 element: <Contact />,
+            },
+            {
+                path: 'cart',
+                element: <Cart />,
             },
             {
                 path: 'admin',
