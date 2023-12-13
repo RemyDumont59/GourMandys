@@ -25,11 +25,9 @@ export function SortContextProvider({ children }) {
     const sortByCategory = (cat) => {
         setSortedCakes(cakes.filter((cake) => cake.category === cat));
     };
-    console.log("sortedCakes : ", sortedCakes);
     const allCakes = () => {
         setSortedCakes(cakes);
     };
-    console.log("sortedCakes : ", sortedCakes);
 
     return (
         <SortContext.Provider

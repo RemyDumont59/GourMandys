@@ -106,6 +106,10 @@ body {
     height: 20px;
 }
 
+#progressBar {
+    display: none;
+}
+
 @media (max-width: 992px) {
     .navbar-brand-title {
         font-size: 3rem;
