@@ -1,0 +1,25 @@
+@import 'pages/products';
+@import 'components/header';
+@import 'components/navBar';
+@import 'components/myOffcanvas.scss';
+@import 'pages/admin/addCake.scss';
+
+body {
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.my-account {
+  border: none;
+  background-color: #fb889c;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 992px) {
+  .navbar-brand-title {
+    font-size: 3rem;
+  }
+}
