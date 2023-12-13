@@ -9,7 +9,7 @@ export function FilterCakes () {
                 id="btnCategories"
                 name="btnCategories"
                 type="select"
-                // style={{boxShadow: 'none', border: '0', color: 'white'}}
+                // styles={{boxShadow: 'none', border: '0', color: 'white'}}
             >
                 <option>
                     CATEGORIES

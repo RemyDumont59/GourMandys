@@ -1,0 +1,16 @@
+.ham-menu {
+  transition: transform .5s;
+}
+
+.ham-menu:hover {
+  transform: scale(1.5);
+}
+
+.navbar-border-color {
+  border-top: 1px solid #fb889c;
+  border-bottom: 1px solid #fb889c;
+}
+
+.navbar-text {
+  line-height: 50px;
+}
