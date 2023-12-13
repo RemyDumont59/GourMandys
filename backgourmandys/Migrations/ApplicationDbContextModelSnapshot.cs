@@ -62,7 +62,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cakes", (string)null);
+                    b.ToTable("Cakes");
 
                     b.HasData(
                         new
@@ -141,7 +141,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("CakeId");
 
-                    b.ToTable("PicturePaths", (string)null);
+                    b.ToTable("PicturePaths");
 
                     b.HasData(
                         new
@@ -155,6 +155,42 @@ namespace backgourmandys.Migrations
                             Id = 2,
                             CakeId = 1,
                             Path = "https://img-global.cpcdn.com/recipes/6ea0238b091c23d4/1200x630cq70/photo.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CakeId = 2,
+                            Path = "https://www.pieceofcake.gi/wp-content/uploads/2020/11/IMG_2918.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CakeId = 2,
+                            Path = "https://simshomekitchen.com/wp-content/uploads/2022/08/kinder-cake-2.png"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CakeId = 3,
+                            Path = "https://lafrenchiepatisserie.com/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-05-at-18.34.09-1.jpeg"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CakeId = 3,
+                            Path = "https://lafrenchiepatisserie.com/wp-content/uploads/2021/07/WhatsApp-Image-2021-07-05-at-23.11.41.jpeg"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CakeId = 4,
+                            Path = "https://i.etsystatic.com/18089847/r/il/1eddf2/1669714698/il_1080xN.1669714698_khkj.jpg"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CakeId = 4,
+                            Path = "https://i.ebayimg.com/images/g/K1AAAOSwfn9gcN1L/s-l1600.jpg"
                         });
                 });
 

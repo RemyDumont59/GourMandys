@@ -3,9 +3,9 @@ import {NavLink} from "react-router-dom";
 
 function Header() {
     return (
-        <div className="d-flex align-items-center px-3 px-md-5" style={{height: '100px'}}>
+        <div className="header d-flex align-items-center px-3 px-md-5" style={{height: '100px'}}>
             <NavbarBrand href="/" className="me-auto">
-                <p className="navbar-brand-title">Gourmandy&apos;s</p>
+                <p className="header__brand-title">Gourmandy&apos;s</p>
             </NavbarBrand>
             <div className="d-flex align-items-center gap-4 gap-md-5">
                 <button className="my-account p-3 rounded-4 d-none d-sm-block">Mon Compte</button>
