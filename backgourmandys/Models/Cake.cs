@@ -22,5 +22,14 @@ namespace backgourmandys.Models
         public int MinimalQuantity { get; set; }
         public int Lot { get; set; }
         public bool IsNumberOrLetterCake { get; set; }
+
+        public string? FlavourDisplay
+        {
+            get
+            {
+                var flavour = Flavour.ToString();
+                return flavour;
+            }
+        }
     }
 }

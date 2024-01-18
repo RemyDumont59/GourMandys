@@ -27,6 +27,7 @@ app.UseCors(options =>
 
 app.UseHttpsRedirection();
 
+// app.useAuthentication(); // ACTIVE CE PUTAIN DE TRUC POUR l'AUTHENTICATION BIDULE !!!
 app.UseAuthorization();
 
 app.MapControllers();
