@@ -12,24 +12,17 @@ namespace backgourmandys.Models
         public string? Content { get; set; }
         [Required]
         public Category Category { get; set; }
-        public Flavour Flavour { get; set; }
         [Required]
         public List<PicturePath>? PicturePath { get; set; } = new List<PicturePath>();
+        //[Required]
+        public List<CakeFlavor>? CakeFlavors { get; set; } = new List<CakeFlavor>();
         [Required]
         public decimal Price { get; set; }
         public int Pieces { get; set; }
         public string? Size { get; set; }
         public int MinimalQuantity { get; set; }
         public int Lot { get; set; }
-        public bool IsNumberOrLetterCake { get; set; }
-
-        public string? FlavourDisplay
-        {
-            get
-            {
-                var flavour = Flavour.ToString();
-                return flavour;
-            }
-        }
+        public bool IsNumberCake { get; set; }
+        public bool IsLetterCake { get; set; }
     }
 }

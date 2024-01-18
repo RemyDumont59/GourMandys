@@ -15,19 +15,19 @@ namespace backgourmandys.Repositories
         
         public async Task<Cake?> GetById(int id)
         {
-            return await _dbContext.Cakes.Include(c => c.PicturePath).FirstOrDefaultAsync(c => c.Id == id);
+            return await _dbContext.Cakes.Include(c => c.PicturePath).Include(cf => cf.CakeFlavors).FirstOrDefaultAsync(c => c.Id == id);
         }
         public async Task<Cake?> Get(Expression<Func<Cake, bool>> predicate)
         {
-            return await _dbContext.Cakes.Include(c => c.PicturePath).FirstOrDefaultAsync(predicate);
+            return await _dbContext.Cakes.Include(c => c.PicturePath).Include(cf => cf.CakeFlavors).FirstOrDefaultAsync(predicate);
         }
         public async Task<List<Cake>> GetAll()
         {
-            return await _dbContext.Cakes.Include(c => c.PicturePath).ToListAsync();
+            return await _dbContext.Cakes.Include(c => c.PicturePath).Include(cf => cf.CakeFlavors).ToListAsync();
         }
         public async Task<List<Cake>> GetAll(Expression<Func<Cake, bool>> predicate)
         {
-            return await _dbContext.Cakes.Include(c => c.PicturePath).Where(predicate).ToListAsync();
+            return await _dbContext.Cakes.Include(c => c.PicturePath).Include(cf => cf.CakeFlavors).Where(predicate).ToListAsync();
         }   
         public async Task<int> Add(Cake cake)
         {

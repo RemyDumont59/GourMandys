@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backgourmandys.Datas;
 
@@ -10,9 +11,11 @@ using backgourmandys.Datas;
 namespace backgourmandys.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240118145439_TableCakeFlavorv2")]
+    partial class TableCakeFlavorv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cakes", (string)null);
+                    b.ToTable("Cakes");
 
                     b.HasData(
                         new
@@ -135,7 +138,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("FlavorId");
 
-                    b.ToTable("CakeFlavors", (string)null);
+                    b.ToTable("CakeFlavors");
 
                     b.HasData(
                         new
@@ -173,7 +176,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Flavors", (string)null);
+                    b.ToTable("Flavors");
 
                     b.HasData(
                         new
@@ -221,7 +224,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("CakeId");
 
-                    b.ToTable("PicturePaths", (string)null);
+                    b.ToTable("PicturePaths");
 
                     b.HasData(
                         new

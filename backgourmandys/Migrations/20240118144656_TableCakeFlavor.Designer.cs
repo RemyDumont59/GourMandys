@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backgourmandys.Datas;
 
@@ -10,9 +11,11 @@ using backgourmandys.Datas;
 namespace backgourmandys.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240118144656_TableCakeFlavor")]
+    partial class TableCakeFlavor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cakes", (string)null);
+                    b.ToTable("Cakes");
 
                     b.HasData(
                         new
@@ -135,29 +138,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("FlavorId");
 
-                    b.ToTable("CakeFlavors", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CakeId = 1,
-                            FlavorId = 1
-                        },
-                        new
-                        {
-                            CakeId = 1,
-                            FlavorId = 2
-                        },
-                        new
-                        {
-                            CakeId = 2,
-                            FlavorId = 2
-                        },
-                        new
-                        {
-                            CakeId = 2,
-                            FlavorId = 3
-                        });
+                    b.ToTable("CakeFlavors");
                 });
 
             modelBuilder.Entity("backgourmandys.Models.Flavor", b =>
@@ -173,7 +154,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Flavors", (string)null);
+                    b.ToTable("Flavors");
 
                     b.HasData(
                         new
@@ -221,7 +202,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("CakeId");
 
-                    b.ToTable("PicturePaths", (string)null);
+                    b.ToTable("PicturePaths");
 
                     b.HasData(
                         new

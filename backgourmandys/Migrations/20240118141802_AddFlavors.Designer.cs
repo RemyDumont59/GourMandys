@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backgourmandys.Datas;
 
@@ -10,9 +11,11 @@ using backgourmandys.Datas;
 namespace backgourmandys.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240118141802_AddFlavors")]
+    partial class AddFlavors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,6 +23,21 @@ namespace backgourmandys.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CakeFlavor", b =>
+                {
+                    b.Property<int>("CakesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlavorsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CakesId", "FlavorsId");
+
+                    b.HasIndex("FlavorsId");
+
+                    b.ToTable("CakeFlavor");
+                });
 
             modelBuilder.Entity("backgourmandys.Models.Cake", b =>
                 {
@@ -62,7 +80,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cakes", (string)null);
+                    b.ToTable("Cakes");
 
                     b.HasData(
                         new
@@ -123,43 +141,6 @@ namespace backgourmandys.Migrations
                         });
                 });
 
-            modelBuilder.Entity("backgourmandys.Models.CakeFlavor", b =>
-                {
-                    b.Property<int>("CakeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlavorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CakeId", "FlavorId");
-
-                    b.HasIndex("FlavorId");
-
-                    b.ToTable("CakeFlavors", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CakeId = 1,
-                            FlavorId = 1
-                        },
-                        new
-                        {
-                            CakeId = 1,
-                            FlavorId = 2
-                        },
-                        new
-                        {
-                            CakeId = 2,
-                            FlavorId = 2
-                        },
-                        new
-                        {
-                            CakeId = 2,
-                            FlavorId = 3
-                        });
-                });
-
             modelBuilder.Entity("backgourmandys.Models.Flavor", b =>
                 {
                     b.Property<int>("Id")
@@ -173,7 +154,7 @@ namespace backgourmandys.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Flavors", (string)null);
+                    b.ToTable("Flavors");
 
                     b.HasData(
                         new
@@ -221,7 +202,7 @@ namespace backgourmandys.Migrations
 
                     b.HasIndex("CakeId");
 
-                    b.ToTable("PicturePaths", (string)null);
+                    b.ToTable("PicturePaths");
 
                     b.HasData(
                         new
@@ -274,23 +255,19 @@ namespace backgourmandys.Migrations
                         });
                 });
 
-            modelBuilder.Entity("backgourmandys.Models.CakeFlavor", b =>
+            modelBuilder.Entity("CakeFlavor", b =>
                 {
-                    b.HasOne("backgourmandys.Models.Cake", "Cake")
-                        .WithMany("CakeFlavors")
-                        .HasForeignKey("CakeId")
+                    b.HasOne("backgourmandys.Models.Cake", null)
+                        .WithMany()
+                        .HasForeignKey("CakesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backgourmandys.Models.Flavor", "Flavor")
-                        .WithMany("CakeFlavors")
-                        .HasForeignKey("FlavorId")
+                    b.HasOne("backgourmandys.Models.Flavor", null)
+                        .WithMany()
+                        .HasForeignKey("FlavorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Cake");
-
-                    b.Navigation("Flavor");
                 });
 
             modelBuilder.Entity("backgourmandys.Models.PicturePath", b =>
@@ -306,14 +283,7 @@ namespace backgourmandys.Migrations
 
             modelBuilder.Entity("backgourmandys.Models.Cake", b =>
                 {
-                    b.Navigation("CakeFlavors");
-
                     b.Navigation("PicturePath");
-                });
-
-            modelBuilder.Entity("backgourmandys.Models.Flavor", b =>
-                {
-                    b.Navigation("CakeFlavors");
                 });
 #pragma warning restore 612, 618
         }

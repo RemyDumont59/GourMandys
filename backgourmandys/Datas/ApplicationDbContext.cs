@@ -9,10 +9,36 @@ public class ApplicationDbContext : DbContext
     {
     }
     public DbSet<Cake> Cakes { get; set; }
+    public DbSet<Flavor> Flavors { get; set; }
+    public DbSet<CakeFlavor> CakeFlavors { get; set; }
     public DbSet<PicturePath> PicturePaths { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        List<CakeFlavor> cakeFlavors = new List<CakeFlavor>()
+        {
+            new CakeFlavor()
+            {
+                CakeId = 1,
+                FlavorId = 1,
+            },
+            new CakeFlavor()
+            {
+                CakeId = 1,
+                FlavorId = 2,
+            },
+            new CakeFlavor()
+            {
+                CakeId = 2,
+                FlavorId = 2,
+            },
+            new CakeFlavor()
+            {
+                CakeId = 2,
+                FlavorId = 3,
+            },
+        };
+
         List<PicturePath> pictures = new List<PicturePath>()
         {
             new PicturePath()
@@ -65,6 +91,35 @@ public class ApplicationDbContext : DbContext
             },
         };
 
+        List<Flavor> flavors = new List<Flavor>()
+        {
+            new Flavor()
+            {
+                Id = 1,
+                Name = "Chocolat"
+            },
+            new Flavor()
+            {
+                Id = 2,
+                Name = "Bueno"
+            },
+            new Flavor()
+            {
+                Id = 3,
+                Name = "Framboise"
+            },
+            new Flavor()
+            {
+                Id = 4,
+                Name = "Fraise"
+            },
+            new Flavor()
+            {
+                Id = 5,
+                Name = "Poire"
+            },
+        };
+
         List<Cake> cakesList = new List<Cake>()
         {
             new Cake()
@@ -73,13 +128,14 @@ public class ApplicationDbContext : DbContext
                 Title = "ChocoBon",
                 Content = "C'est un gâteau aux chocolats qui n'est bon !",
                 Category = Enum.Category.Personnalisé,
-                Flavour = Enum.Flavour.Nutella,
                 Price = 20.00m,
                 Pieces = 1,
                 Size = "A4",
                 MinimalQuantity = 1,
                 Lot = 1,
-                IsNumberOrLetterCake = false,
+                IsLetterCake = false,
+                IsNumberCake = false,
+
             },
             new Cake()
             {
@@ -87,13 +143,13 @@ public class ApplicationDbContext : DbContext
                 Title = "KinderBuenoWhite",
                 Content = "C'est un biscuit aux chocolats Blancs qui n'est pas noir !",
                 Category = Enum.Category.GenderReveal,
-                Flavour = Enum.Flavour.ChocolatBlancFramboise,
                 Price = 10.00m,
                 Pieces = 2,
                 Size = "A3",
                 MinimalQuantity = 4,
                 Lot = 6,
-                IsNumberOrLetterCake = false,
+                IsLetterCake = false,
+                IsNumberCake = false,
             },
             new Cake()
             {
@@ -101,13 +157,13 @@ public class ApplicationDbContext : DbContext
                 Title = "MarryMe",
                 Content = "C'est un gâteau pour des mariages !",
                 Category = Enum.Category.Mariage,
-                Flavour = Enum.Flavour.Praliné,
                 Price = 200.00m,
                 Pieces = 1,
                 Size = "A4",
                 MinimalQuantity = 1,
                 Lot = 1,
-                IsNumberOrLetterCake = false,
+                IsLetterCake = false,
+                IsNumberCake = false,
             },
             new Cake()
             {
@@ -115,17 +171,21 @@ public class ApplicationDbContext : DbContext
                 Title = "HappyBirthDay",
                 Content = "C'est un gâteau d'anniversaire chocolats poire !",
                 Category = Enum.Category.Anniversaire,
-                Flavour = Enum.Flavour.ChocolatPoire,
                 Price = 15.99m,
                 Pieces = 10,
                 Size = "A2",
                 MinimalQuantity = 10,
                 Lot = 3,
-                IsNumberOrLetterCake = true,
+                IsLetterCake = false,
+                IsNumberCake = false,
 
             },
         };
         modelBuilder.Entity<Cake>().HasData(cakesList);
         modelBuilder.Entity<PicturePath>().HasData(pictures);
+        modelBuilder.Entity<Flavor>().HasData(flavors);
+        modelBuilder.Entity<CakeFlavor>()
+            .HasKey(cf => new { cf.CakeId, cf.FlavorId });
+        modelBuilder.Entity<CakeFlavor>().HasData(cakeFlavors);
     }
 }
