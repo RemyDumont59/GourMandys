@@ -1,5 +1,4 @@
-﻿using backgourmandys.Enum;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace backgourmandys.Models
@@ -12,7 +11,8 @@ namespace backgourmandys.Models
         public string? Title { get; set; }
         public string? Content { get; set; }
         [Required]
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+        public Category? Category { get; set; }
         [Required]
         public List<PicturePath>? PicturePath { get; set; } = new List<PicturePath>();
         [JsonIgnore]

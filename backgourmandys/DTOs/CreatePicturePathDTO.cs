@@ -1,6 +1,4 @@
-﻿using backgourmandys.Enum;
-
-namespace backgourmandys.DTOs;
+﻿namespace backgourmandys.DTOs;
 
 public class CreatePicturePathDto
 {

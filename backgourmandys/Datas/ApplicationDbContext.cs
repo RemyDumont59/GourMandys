@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Cake> Cakes { get; set; }
     public DbSet<Flavor> Flavors { get; set; }
     public DbSet<CakeFlavor> CakeFlavors { get; set; }
+    public DbSet<Category> Categories { get; set; }
     public DbSet<PicturePath> PicturePaths { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -120,6 +121,30 @@ public class ApplicationDbContext : DbContext
             },
         };
 
+        List<Category> categories = new List<Category>()
+        {
+            new Category()
+            {
+                Id = 1,
+                Name = "Mariage",
+            },
+            new Category()
+            {
+                Id = 2,
+                Name = "Anniversaire"
+            },
+            new Category()
+            {
+                Id = 3,
+                Name = "Naissance"
+            },
+            new Category()
+            {
+                Id = 4,
+                Name = "Personnalisé"
+            }
+        };
+
         List<Cake> cakesList = new List<Cake>()
         {
             new Cake()
@@ -127,7 +152,7 @@ public class ApplicationDbContext : DbContext
                 Id = 1,
                 Title = "ChocoBon",
                 Content = "C'est un gâteau aux chocolats qui n'est bon !",
-                Category = Enum.Category.Personnalisé,
+                CategoryId = 3,
                 Price = 20.00m,
                 Pieces = 1,
                 Size = "A4",
@@ -141,7 +166,7 @@ public class ApplicationDbContext : DbContext
                 Id = 2,
                 Title = "KinderBuenoWhite",
                 Content = "C'est un biscuit aux chocolats Blancs qui n'est pas noir !",
-                Category = Enum.Category.GenderReveal,
+                CategoryId = 3,
                 Price = 10.00m,
                 Pieces = 2,
                 Size = "A3",
@@ -155,7 +180,7 @@ public class ApplicationDbContext : DbContext
                 Id = 3,
                 Title = "MarryMe",
                 Content = "C'est un gâteau pour des mariages !",
-                Category = Enum.Category.Mariage,
+                CategoryId = 1,
                 Price = 200.00m,
                 Pieces = 1,
                 Size = "A4",
@@ -169,7 +194,7 @@ public class ApplicationDbContext : DbContext
                 Id = 4,
                 Title = "HappyBirthDay",
                 Content = "C'est un gâteau d'anniversaire chocolats poire !",
-                Category = Enum.Category.Anniversaire,
+                CategoryId = 2,
                 Price = 15.99m,
                 Pieces = 10,
                 Size = "A2",
@@ -179,6 +204,7 @@ public class ApplicationDbContext : DbContext
                 IsNumberCake = false,
             },
         };
+
         modelBuilder.Entity<Cake>()
             .HasMany(e => e.Flavors)
             .WithMany(e => e.Cakes)
@@ -188,6 +214,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Cake>().HasData(cakesList);
         modelBuilder.Entity<PicturePath>().HasData(pictures);
         modelBuilder.Entity<Flavor>().HasData(flavors);
+        modelBuilder.Entity<Category>().HasData(categories);
         modelBuilder.Entity<CakeFlavor>()
             .HasKey(cf => new { cf.CakeId, cf.FlavorId });
         modelBuilder.Entity<CakeFlavor>().HasData(cakeFlavors);

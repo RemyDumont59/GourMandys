@@ -40,5 +40,6 @@ public static class DependencyInjectionExtension
         builder.Services.AddScoped<IRepository<Cake>, CakeRepository>();
         builder.Services.AddScoped<IRepository<PicturePath>, PicturePathRepository>();
         builder.Services.AddScoped<IRepository<Flavor>, FlavorRepository>();
+        builder.Services.AddScoped<IRepository<Category>, CategoryRepository>();
     }
 }
