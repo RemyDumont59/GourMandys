@@ -6,9 +6,9 @@ import {useSort} from "../hooks/useSort.jsx";
 function Products() {
     const { sortedCakes } = useSort();
 
-    useEffect(() => {
-        console.log("sortedCakes qty : ", sortedCakes.length);
-    }, [sortedCakes]);
+    // useEffect(() => {
+    //     console.log("sortedCakes qty : ", sortedCakes.length);
+    // }, [sortedCakes]);
 
     return (
         <div className="position-relative">

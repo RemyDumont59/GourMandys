@@ -4,13 +4,14 @@ import UseFetchData from "../hooks/useFetchData.js";
 
 function Product() {
     const {id} = useParams();
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         UseFetchData(`http://localhost:5016/api/Cake/${id}`)
             .then(data => setData(data));
     }, [id]);
 
+    console.log("la data du product : ", data);
     const { cake } = data;
 
     if (cake !== undefined) {
@@ -24,6 +25,12 @@ function Product() {
                     <img width={100} height={100} key={picture.id} src={picture.path} alt={picture.title} />
                 ))}
                 <p>{cake.content}</p>
+                <p>Parfum : </p>
+                <ul>
+                    {cake.flavors.map((flavor, index) => (
+                        <li key={flavor.id}>{index + 1} - {flavor.name}</li>
+                    ))}
+                </ul>
             </div>
         )
     } else {
