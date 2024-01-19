@@ -16,19 +16,19 @@ namespace backgourmandys.Repositories
 
         public async Task<Flavor?> GetById(int id)
         {
-            return await _dbContext.Flavors.Include(f => f.CakeFlavors).FirstOrDefaultAsync(f => f.Id == id);
+            return await _dbContext.Flavors.Include(f => f.Cakes).FirstOrDefaultAsync(f => f.Id == id);
         }
         public async Task<Flavor?> Get(Expression<Func<Flavor, bool>> predicate)
         {
-            return await _dbContext.Flavors.Include(f => f.CakeFlavors).FirstOrDefaultAsync(predicate);
+            return await _dbContext.Flavors.Include(f => f.Cakes).FirstOrDefaultAsync(predicate);
         }
         public async Task<List<Flavor>> GetAll()
         {
-            return await _dbContext.Flavors.Include(f => f.CakeFlavors).ToListAsync();
+            return await _dbContext.Flavors.Include(f => f.Cakes).ToListAsync();
         }
         public async Task<List<Flavor>> GetAll(Expression<Func<Flavor, bool>> predicate)
         {
-            return await _dbContext.Flavors.Include(f => f.CakeFlavors).Where(predicate).ToListAsync();
+            return await _dbContext.Flavors.Include(f => f.Cakes).Where(predicate).ToListAsync();
         }
         public async Task<int> Add(Flavor flavor)
         {

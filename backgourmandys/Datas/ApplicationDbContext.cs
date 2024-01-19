@@ -135,7 +135,6 @@ public class ApplicationDbContext : DbContext
                 Lot = 1,
                 IsLetterCake = false,
                 IsNumberCake = false,
-
             },
             new Cake()
             {
@@ -178,9 +177,14 @@ public class ApplicationDbContext : DbContext
                 Lot = 3,
                 IsLetterCake = false,
                 IsNumberCake = false,
-
             },
         };
+        modelBuilder.Entity<Cake>()
+            .HasMany(e => e.Flavors)
+            .WithMany(e => e.Cakes)
+            .UsingEntity<CakeFlavor>(
+                l => l.HasOne<Flavor>(e => e.Flavor).WithMany(e => e.CakeFlavors),
+                r => r.HasOne<Cake>(e => e.Cake).WithMany(e => e.CakeFlavors));
         modelBuilder.Entity<Cake>().HasData(cakesList);
         modelBuilder.Entity<PicturePath>().HasData(pictures);
         modelBuilder.Entity<Flavor>().HasData(flavors);

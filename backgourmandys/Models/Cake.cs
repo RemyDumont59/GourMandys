@@ -1,5 +1,6 @@
 ﻿using backgourmandys.Enum;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace backgourmandys.Models
 {
@@ -14,8 +15,9 @@ namespace backgourmandys.Models
         public Category Category { get; set; }
         [Required]
         public List<PicturePath>? PicturePath { get; set; } = new List<PicturePath>();
-        //[Required]
+        [JsonIgnore]
         public List<CakeFlavor>? CakeFlavors { get; set; } = new List<CakeFlavor>();
+        public List<Flavor>? Flavors { get; set; } = new List<Flavor>();
         [Required]
         public decimal Price { get; set; }
         public int Pieces { get; set; }

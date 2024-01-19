@@ -15,11 +15,11 @@ namespace backgourmandys.Repositories
         }
         public async Task<List<CakeFlavor>> GetAll()
         {
-            return await _dbContext.CakeFlavors.Include(cf => cf.Cake).Include(cf => cf.Flavor).ToListAsync();
+            return await _dbContext.CakeFlavors.ToListAsync();
         }
         public async Task<List<CakeFlavor>> GetAll(Expression<Func<CakeFlavor, bool>> predicate)
         {
-            return await _dbContext.CakeFlavors.Include(cf => cf.Cake).Include(cf => cf.Flavor).Where(predicate).ToListAsync();
+            return await _dbContext.CakeFlavors.Where(predicate).ToListAsync();
         }
     }
 
